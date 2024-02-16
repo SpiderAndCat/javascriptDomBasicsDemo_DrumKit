@@ -69,6 +69,8 @@ for(var i = 0; i < document.querySelectorAll(".drum").length; i++) {
                 break;
         }
 
+        buttonAnimation(buttonInnerHTML);
+
     });
 }
 
@@ -79,6 +81,7 @@ for(var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 document.addEventListener("keypress", function (event) {
     // Handle the click
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
 function makeSound(key) {
@@ -117,7 +120,21 @@ function makeSound(key) {
             break;
 
         default:
-            console.log(buttonInnerHTML + "is not a valid key")
+            console.log(key + "is not a valid key")
             break;
     }
+}
+
+/*
+* Add Animation, using classList
+*/
+
+function buttonAnimation(key) {
+    var activeButton = document.querySelector("." + key);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+    }, 100)
 }
